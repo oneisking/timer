@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>座位表</title>
+    <style type="text/css">
+        th{
+            transition:transform 1s;
+        }
+        .ren{
+            background: lightblue;
+        }
+        .ren:hover{
+            transform:rotate(360deg);
+        }
+        /*table{
+            animation: run 3s;
+            transition:1s;
+        }*/
+
+        /*@keyframes run{
+            0%{ transform: scale(0) rotate(0deg);}
+            100%{ transform: scale(1.2) rotate(360deg);}
+        }*/
+        /*table:hover{
+            transform:scale(1.2) rotate(360deg);
+        }*/
+        button{
+            width: 100%;
+            height: 50px;
+        }
+        td{
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @keyframes go{
+            20%{transform:rotate(360deg) scale(2);}
+            50%{transform:rotate(360deg) scale(0);}
+            100%{transform:rotate(360deg) scale(1);}
+        }
+    </style>
+</head>
+<body>
+    <table border="1" width="500" align="center">
+        <tr height="50">
+            <td rowspan="2" colspan="2">柱子</td>
+            <td width="100" rowspan="10">过道</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="50">
+            
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="50">
+            <td width="100"></td>
+            <td width="100"></td>
+
+            <td width="100"></td>
+            <td width="100"></td>
+        </tr>
+        <tr height="50">
+            <th class="ren">吴瑞森</th>
+            <td></td>
+            
+            <th class="ren">邓富铖</th>
+            <th class="ren">齐云飞</th>
+        </tr>
+        <tr height="50">
+            <td></td>
+            <th class="ren">李捷东</th>
+            
+            <td></td>
+            <th class="ren">黄子杰</th>
+        </tr>
+        <tr height="50">
+            <th class="ren">张帆</th>
+            <td></td>
+            
+            <th class="ren">徐庆烽</th>
+            <th class="ren">周伯涛</th>
+        </tr>
+        <tr height="50">
+            <th class="ren">邓国东</th>
+            <th class="ren">陈泽杰</th>
+            
+            <th class="ren">林郁腾</th>
+            <th class="ren">杨杰沛</th>
+        </tr>
+        <tr height="50">
+            <td></td>
+            <th class="ren">吴靖辉</th>
+            
+            <th class="ren">黄敏桓</th>
+            <th class="ren">陈志杰</th>
+        </tr>
+        <tr height="50">
+            <th class="ren">武长斌</th>
+            <td></td>
+            
+            <th class="ren">陈钊汶</th>
+            <td></td>
+        </tr>
+        <tr height="50">
+            <td></td>
+            <td></td>
+            
+            <th class="ren">钟华精</th>
+            <td></td>
+        </tr>
+        <tr height="50">
+            <td colspan="2">讲台</td>
+            <td colspan="3"><button id="btn">开始</button></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        
+        // 定时器
+        // 一次性 SetTimeout
+        // 周期性 SetInterval（function(){} ，200//时间参数，默认单位ms）
+        var btns = document.getElementById("btn");
+        var pp = document.getElementsByClassName("ren");
+        var n = -1; 
+
+        btns.onclick = function(){
+            if (btn.innerHTML == '开始') {
+                if (pp.length == 0) {
+                    //点完了
+                    alert('已经点完了，请刷新页面重新开始');
+                    return; //终止函数的执行
+                }
+
+                 //1.修改按钮文本
+                btn.innerHTML = '暂停';
+
+                //2. 让红色的背景跑起来
+                timer = setInterval(function(){
+                    //还原之前改的红色背景
+                    if (n != -1) {
+                        pp[n].style.background = 'lightblue';
+                    }
+
+                    n = Math.floor(Math.random() * pp.length);
+                    pp[n].style.background = 'red';
+                }, 50);
+            } else {
+                pp[n].style.background = 'yellow';
+                pp[n].style.animation = 'go 2s';
+                pp[n].className = '';
+                n = -1
+                btn.innerHTML = '开始';
+                //清除定时器
+                clearInterval(timer);
+            }
+
+        };
+
+/*
+定时器
+    一次性定时器
+    周期性定时器
+        timer = setInterval(函数, 时间); //设置周期性定时器
+            时间单位为: ms毫秒    1000ms = 1s
+
+        clearInterval(timer); //清除周期性定时器
+
+ */
+    </script>
+</body>
+</html>
